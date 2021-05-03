@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:12.2-alpine
+    container_name: "golf-database"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - golf-network
+    volumes:
+      - database_postgres:/var/lib/golf/data
+  api:
+    build: .
+    container_name: "golf-processor"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    ports:
+    - "8090:8080"
+    depends_on:
+      - db
+    networks:
+      - golf-network
+
+volumes:
+    database_postgres:
+
+networks:
+  golf-network:
+    driver: bridge

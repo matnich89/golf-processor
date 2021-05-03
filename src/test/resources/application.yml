@@ -1,0 +1,14 @@
+spring:
+  liquibase:
+    change-log: classpath:db.changelog-master.xml
+    enabled: false
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    database: postgresql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none

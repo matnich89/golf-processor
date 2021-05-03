@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Mat">
+        <createTable tableName="golf_tournament">
+            <column name="id" type="bigint">
+                <constraints  nullable="false"  primaryKey="true"  unique="false"/>
+            </column>
+            <column name="external_id" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="start_date" type="date">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="end_date" type="date">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="country" type="varchar(150)">
+                 <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="rounds" type="tinyint">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="source" type="varchar(50)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="course" type="varchar(200)">
+                <constraints  nullable="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
