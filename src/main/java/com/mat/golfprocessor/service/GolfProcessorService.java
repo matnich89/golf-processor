@@ -46,7 +46,7 @@ public class GolfProcessorService {
         try {
             golfTournamentRepo.save(golfTournament);
         } catch (Exception e) {
-              log.error("Error occurred when persisting golf tournament with externalId {}", golfTournament.getExternalId());
+              log.error("Error occurred when persisting golf tournament with externalId {} error is {}", golfTournament.getExternalId(), e.getMessage());
         }
 
     }

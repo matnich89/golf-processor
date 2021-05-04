@@ -32,7 +32,6 @@ public class GolfDataProcessorTest {
 
     @Test
     public void shouldSaveSourceData1() throws Exception {
-        System.out.println(Thread.currentThread().getName());
         performPostWithData("src/test/resources/data/GolfData1.json");
         await().until(awaitUntilSourceDataIsPersisted());
         mockMvc.perform(get("/data/golf/{id}", "1")).andExpect(status().isOk())
