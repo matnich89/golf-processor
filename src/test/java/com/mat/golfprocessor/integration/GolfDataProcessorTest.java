@@ -34,7 +34,7 @@ public class GolfDataProcessorTest {
     @Test
     public void shouldSaveSourceData1() throws Exception {
         performPostWithData("src/test/resources/data/GolfData1.json");
-        await().atMost(60, SECONDS).until(awaitUntilSourceDataIsPersisted());
+        await().atMost(120, SECONDS).until(awaitUntilSourceDataIsPersisted());
         mockMvc.perform(get("/data/golf/{id}", "1")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.externalId", is("174638")))
                 .andExpect(jsonPath("$.id", is(1)))
@@ -49,7 +49,7 @@ public class GolfDataProcessorTest {
     @Test
     public void shouldSaveSourceData2() throws Exception {
         performPostWithData("src/test/resources/data/GolfData2.json");
-        await().atMost(60, SECONDS).until(awaitUntilSourceDataIsPersisted());
+        await().atMost(120, SECONDS).until(awaitUntilSourceDataIsPersisted());
         mockMvc.perform(get("/data/golf/{id}", "1")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.externalId", is("southWestInvitational")))
                 .andExpect(jsonPath("$.id", is(1)))

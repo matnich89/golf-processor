@@ -46,21 +46,23 @@ public class GolfProcessorServiceTest {
     }
 
     @Test
-    public void shouldProcessSource1DataCorrectly() {
+    public void shouldProcessSource1DataCorrectly() throws InterruptedException {
         doReturn(new GolfTournament()).when(source1Convertor).apply(any());
         doReturn(source1Convertor).when(formatConvertorMap).get(GolfDataSource1.class);
         final GolfData golfData = GolfDataProviderUtil.createGolfDataSource1();
         golfProcessorService.processData(golfData);
+        Thread.sleep(10000);
         verify(source1Convertor).apply(golfData);
         verify(golfTournamentRepo).save(any(GolfTournament.class));
     }
 
     @Test
-    public void shouldProcessSource2DataCorrectly() {
+    public void shouldProcessSource2DataCorrectly() throws InterruptedException {
         doReturn(new GolfTournament()).when(source2Convertor).apply(any());
         doReturn(source2Convertor).when(formatConvertorMap).get(GolfDataSource2.class);
         final GolfData golfData = GolfDataProviderUtil.createGolfDataSource2();
         golfProcessorService.processData(golfData);
+        Thread.sleep(10000);
         verify(source2Convertor).apply(golfData);
         verify(golfTournamentRepo).save(any(GolfTournament.class));
     }
