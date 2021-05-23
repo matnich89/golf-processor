@@ -10,6 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,7 +34,7 @@ public class GolfDataProcessorTest {
     @Test
     public void shouldSaveSourceData1() throws Exception {
         performPostWithData("src/test/resources/data/GolfData1.json");
-        await().until(awaitUntilSourceDataIsPersisted());
+        await().atMost(60, SECONDS).until(awaitUntilSourceDataIsPersisted());
         mockMvc.perform(get("/data/golf/{id}", "1")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.externalId", is("174638")))
                 .andExpect(jsonPath("$.id", is(1)))
@@ -48,7 +49,7 @@ public class GolfDataProcessorTest {
     @Test
     public void shouldSaveSourceData2() throws Exception {
         performPostWithData("src/test/resources/data/GolfData2.json");
-        await().until(awaitUntilSourceDataIsPersisted());
+        await().atMost(60, SECONDS).until(awaitUntilSourceDataIsPersisted());
         mockMvc.perform(get("/data/golf/{id}", "1")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.externalId", is("southWestInvitational")))
                 .andExpect(jsonPath("$.id", is(1)))
