@@ -1,5 +1,6 @@
 package com.mat.golfprocessor.integration;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +27,7 @@ import java.util.concurrent.Callable;
 @ActiveProfiles("integration")
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@Disabled
 public class GolfDataProcessorTest {
 
     @Autowired
@@ -34,7 +36,7 @@ public class GolfDataProcessorTest {
     @Test
     public void shouldSaveSourceData1() throws Exception {
         performPostWithData("src/test/resources/data/GolfData1.json");
-        await().atMost(120, SECONDS).until(awaitUntilSourceDataIsPersisted());
+        await().atMost(10, SECONDS).until(awaitUntilSourceDataIsPersisted());
         mockMvc.perform(get("/data/golf/{id}", "1")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.externalId", is("174638")))
                 .andExpect(jsonPath("$.id", is(1)))
@@ -49,7 +51,7 @@ public class GolfDataProcessorTest {
     @Test
     public void shouldSaveSourceData2() throws Exception {
         performPostWithData("src/test/resources/data/GolfData2.json");
-        await().atMost(120, SECONDS).until(awaitUntilSourceDataIsPersisted());
+        await().atMost(10, SECONDS).until(awaitUntilSourceDataIsPersisted());
         mockMvc.perform(get("/data/golf/{id}", "1")).andExpect(status().isOk())
                 .andExpect(jsonPath("$.externalId", is("southWestInvitational")))
                 .andExpect(jsonPath("$.id", is(1)))

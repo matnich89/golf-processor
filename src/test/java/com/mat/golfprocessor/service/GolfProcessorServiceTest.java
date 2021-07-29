@@ -10,6 +10,7 @@ import com.mat.golfprocessor.domain.model.GolfTournament;
 import com.mat.golfprocessor.repository.GolfTournamentRepo;
 import com.mat.golfprocessor.util.GolfDataProviderUtil;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -51,7 +52,7 @@ public class GolfProcessorServiceTest {
         doReturn(source1Convertor).when(formatConvertorMap).get(GolfDataSource1.class);
         final GolfData golfData = GolfDataProviderUtil.createGolfDataSource1();
         golfProcessorService.processData(golfData);
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         verify(source1Convertor).apply(golfData);
         verify(golfTournamentRepo).save(any(GolfTournament.class));
     }
@@ -62,7 +63,7 @@ public class GolfProcessorServiceTest {
         doReturn(source2Convertor).when(formatConvertorMap).get(GolfDataSource2.class);
         final GolfData golfData = GolfDataProviderUtil.createGolfDataSource2();
         golfProcessorService.processData(golfData);
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         verify(source2Convertor).apply(golfData);
         verify(golfTournamentRepo).save(any(GolfTournament.class));
     }
